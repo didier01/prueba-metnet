@@ -1,25 +1,15 @@
 <table class="table">
-    <thead>
-      <tr>        
-        <th scope="col">Precio</th>
-        <th scope="col">Monto</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <!-- <th scope="row">1</th> -->
-        <td>Mark</td>
-        <td>Otto</td>
-      </tr>
-      <tr>
-        <!-- <th scope="row">2</th> -->
-        <td>Jacob</td>
-        <td>Thornton</td>
-      </tr>
-      <tr>
-        <!-- <th scope="row">3</th> -->
-        <td>Larry</td>
-        <td>the Bird</td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th scope="col">Precio</th>
+      <th scope="col">Monto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of (offer | async).offer.versions[0].productOfferingPrices; let index = index">
+      <!-- <th scope="row">{{index + 1}}</th> -->
+      <td>{{item.versions[0].name}}</td>
+      <td>{{item.versions[0].price.amount}}</td>
+  </tr>
+  </tbody>
+</table>

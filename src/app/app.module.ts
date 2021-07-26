@@ -22,7 +22,7 @@ import { offersReducer } from './redux/offers_reducer';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({offers: offersReducer }),
+    StoreModule.forRoot({offer: offersReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]

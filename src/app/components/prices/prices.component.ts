@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { appState } from 'src/app/redux/offers_reducer';
 
 @Component({
   selector: 'app-prices',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PricesComponent implements OnInit {
 
-  constructor() { }
+  offer: Observable<any>;
+  
+  constructor(private store: Store<appState>) {
+    this.offer = store.select('offer');
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    console.log(this.offer);
+    
   }
 
 }

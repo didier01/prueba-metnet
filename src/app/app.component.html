@@ -16,38 +16,42 @@
     <h1 style="text-align: center; margin: 30px;">Prueba de Metmet</h1>
   </div>
   <div class="row">
-    <!-- <div class="col-md-4">
+    <div class="col-md-4">
 
-      <select class="form-select" aria-label="Default select example" (ngModel)="id" (click)="onClick()">
-        <option selected>Selecciona una oferta</option>
-        <option *ngFor="let offer of ofertas; let i = index" value="offer.id">Oferta: {{i+1}} </option>
+      <!-- <select ngModel class="form-select" aria-label="Default select example"  (change)="getData(t.value)" #t>
+        <option>Selecione una oferta </option>
+        <option *ngFor="let offer of ofertas; let i = index" [ngValue]="offer.id">Oferta: {{i+1}} </option>
+      </select> -->
+
+      <select ngModel name="option" class="form-select" id="selectAction" (change)="getId(t.value)" #t>
+        <option>Selecione una oferta</option>
+        <option *ngFor="let op of ofertas; let index = index" [value]="op.id">
+          Oferta: {{ index+1 }}
+        </option>
       </select>
 
-    </div> -->
 
-    <div class="form-group col-md-4" >
-      <select ngModel name="option" class="form-select" id="selectAction" (change) = "getId(t.value)" #t>
-          <option *ngFor="let op of ofertas; let index = index" [value]="op.id">
-              Oferta: {{ index+1 }}
-          </option>
-      </select>
-  </div>
+    </div>
+
+
+
     <div class="col-md-8">
       <app-offer></app-offer>
     </div>
   </div>
 
+
   <div class="row">
-    <div class="co-md-5">
+    <div style="width: 40%;">
       <app-characteristics></app-characteristics>
     </div>
 
-    <div class="co-md-7">
+    <div style="width: 60%;">
       <app-prices></app-prices>
     </div>
-
   </div>
 
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>

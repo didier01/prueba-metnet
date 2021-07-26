@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, Action } from '@ngrx/store';
-import { GetDataAction } from './redux/offers.actions';
-import { getOffer, offersReducer, setID } from './redux/offers_reducer';
-import * as ofertas from "../assets/ofertas.json";
+import { GET_DATA } from './redux/offers.actions';
 
-interface AppState {
-  offer: {};
-}
+import * as ofertas from "../assets/ofertas.json";
+import { Observable } from 'rxjs';
+import { appState } from './redux/offers_reducer';
+
 
 @Component({
   selector: 'app-root',
@@ -16,34 +15,28 @@ interface AppState {
 
 export class AppComponent {
 
-
   title = 'prueba-metnet';
-  offer = {};
-
   ofertas = ofertas['default'];
-  
 
-  constructor(private store: Store<AppState>) {
+  // offer: Observable<any>;
 
-    this.store.subscribe(state => {
-      this.offer = state.offer;
-    });
+  constructor(private store: Store<appState>) {
+    // this.offer = store.select('offer');
 
-    const action = new GetDataAction();
-    store.dispatch(action);
+    // this.store.subscribe(state => {
+    //   this.offer = state.offer;
+    // });
+
+    // const action = new GetDataAction();
+    // store.dispatch(action);
 
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 
   getId(value) {
-    setID(value);
-    const action = new GetDataAction();
-    this.store.dispatch(action);
+    this.store.dispatch({type: GET_DATA, payload: value});
   }
-
 
 
 

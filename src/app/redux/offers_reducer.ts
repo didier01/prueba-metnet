@@ -1,50 +1,39 @@
 import { Action } from "@ngrx/store";
-import * as ofertas from "../../assets/ofertas.json";
 import { GET_DATA } from "./offers.actions";
+import * as ofertas from "../../assets/ofertas.json";
+import { OfferInterface } from '../models/offer_interface';
 
 
-// export function offersReducer (state = ofertas, action: Action) {   
-//     switch (action.type) {
-//         case GET_DATA:
-//             return state;
-//         default:
-//             return state;
-//     }
-// }
+export interface appState {
+    offer: OfferInterface
+}
 
-let singleOffer = {};
+export const initialState = {
+    offer: {}
+}
 
-
-export function offersReducer(state = singleOffer, action: Action) {
-    console.log('reducer ' + singleOffer['id']);
-
+export function offersReducer(state: appState = initialState, action: Action) {
+    // console.log(action);
 
     switch (action.type) {
         case GET_DATA:
-            return state;
+            let id = action['payload'];
+            return { ...state, offer: getItem(id) }
+        // case 'ENGLISH':
+        //     return { ...state, offer: action['payload'] }
+        // case 'SPANISH':
+        //     return { ...state, offer: action['payload'] }
         default:
             return state;
     }
-}
 
-// Actions
-export const getOffer = (offer) => async (dispatch, getState) => {
-    console.log(offer);
 
-    try {
-        dispatch({
-            type: GET_DATA,
-            singleOffer: offer,
-        })
-    } catch (error) {
-        console.log(error);
+
+    function getItem(id) {
+        let found = ofertas['default'].find(item => item.id === id)
+        console.log(found);
+        return found;
     }
 }
-// 
-export function setID(offer) {
-    let found = ofertas['default'].find(id => offer)
-    singleOffer = found;    
-}
-
 
 

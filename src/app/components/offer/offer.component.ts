@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetDataAction } from 'src/app/redux/offers.actions';
+import { Observable } from 'rxjs';
+import { appState } from 'src/app/redux/offers_reducer';
 
-
-
-
-interface AppState {
-  offer: {};
-}
 
 
 @Component({
@@ -19,28 +14,20 @@ interface AppState {
 
 export class OfferComponent implements OnInit {
 
-  id = '020pc';
-  name = 'PC gamer'
-  offer = {};
 
-  constructor(private store: Store<AppState>) {
+  offer: Observable<any>;
 
-    this.store.subscribe(state => {
-      this.offer = state.offer;
-      // state.offer
-      console.log(this.offer);
-    });
+  constructor(private store: Store<appState>) {
+    this.offer = store.select('offer');
 
-    const action = new GetDataAction();
-    store.dispatch(action);
-
+    // this.store.subscribe(state => {
+    //   this.offer = state.offer;
+    // });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
-  onClick() {
-    console.log('offer component');
-  }
+ 
 
 }
